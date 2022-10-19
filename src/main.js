@@ -3,7 +3,7 @@ import App from './App.vue'
 import router from './router'
 
 import './assets/main.css'
-import { store } from '/store.js' // storeをインポート
+import store from './store' // storeをインポート
 
 
 const app = createApp(App)
