@@ -26,6 +26,10 @@ export default {
 </template>
 
 <style scoped>
+p {
+  text-align: center;
+  margin-top: 30px;
+}
 ul {
   margin: 0;
   padding: 0;
@@ -35,6 +39,7 @@ li {
   border-bottom: 1px solid #ccc;
   padding-bottom: 10px;
   margin-bottom: 10px;
+  margin-top: 30px;
 }
 
 li a {
