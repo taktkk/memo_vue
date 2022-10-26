@@ -1,6 +1,8 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
+import { ref, reactive } from 'vue';
+
 </script>
 
 <template>
@@ -11,6 +13,7 @@ import HelloWorld from './components/HelloWorld.vue'
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/new">New</RouterLink>
         <RouterLink to="/about">About</RouterLink>
+        <RouterLink to="/accordion">Accordion</RouterLink>
       </nav>
   </header>
 

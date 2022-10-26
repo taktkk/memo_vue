@@ -1,5 +1,4 @@
 <script setup>
-import { ref, reactive } from 'vue';
 
       let name = ref('');
       let zip = ref('');
