@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, reactive } from 'vue';
 
       let name = ref('');
       let zip = ref('');
@@ -8,13 +8,13 @@ import { ref } from 'vue'
       let building = ref('');
       let interests = ref([]);
       const interestsMaxCount = ref(3);
-      // let errors = ref({
-      //   name: [],
-      //   zip: [],
-      //   prefecture: [],
-      //   address: [],
-      //   interests: []
-      // });
+      let errors = reactive({
+        name: "",
+        zip: "",
+        prefecture: "",
+        address: "",
+        interests: ""
+      });
     
     
       const zipToAddress = () => {
@@ -29,51 +29,44 @@ import { ref } from 'vue'
         });
       };
       const addInterests = () => {
-        this.interests.push('');
+        interests.value.push('');
       };
       const removeInterests = (index) => {
-        this.interests.splice(index, 1);
+        interests.value.splice(index, 1);
       };
       const validate = () => {
-        var errors = {
-          name: [],
-          zip: [],
-          prefecture: [],
-          address: [],
-          interests: []
-        };
-        if (!this.name) {
-          errors.name.push('必須項目が入力されていません');
+        if (!name.value) {
+          errors.name = '必須項目が入力されていません';
         } else if(this.name.length > 20) {
-          errors.name.push('20文字以内で入力してください。');
+          errors.name='20文字以内で入力してください。';
         }
-        if (!this.zip) {
-          errors.zip.push('必須項目が入力されていません');
+        if (!zip.value) {
+          errors.zip='必須項目が入力されていません';
         } else {
-          if (!this.zip.match(/\d{3}-?\d{4}/)) {
-            errors.zip.push('書式が正しくありません');
+          if (!zip.value.match(/\d{3}-?\d{4}/)) {
+            errors.zip='書式が正しくありません';
           }
         }
-        if (!this.prefecture) {
-          errors.prefecture.push('必須項目が入力されていません');
+        if (!prefecture.value) {
+          errors.prefecture='必須項目が入力されていません';
         }
-        if (!this.address) {
-          errors.address.push('必須項目が入力されていません');
-        } else if(this.address.length > 40) {
-          errors.address.push('40文字以内で入力してください。');
+        if (!address.value) {
+          errors.address='必須項目が入力されていません';
+        } else if(address.value.length > 40) {
+          errors.address='40文字以内で入力してください。';
         }
-        if (this.interests.length <= 1 && !this.interests[0]) {
-          errors.interests.push('必須項目が入力されていません');
+        if (interests.value.length <= 1 && !interests.value[0]) {
+          errors.interests='必須項目が入力されていません';
         }
-        this.errors = errors;
+        
       };
    
     
       const canAddInterests = () => {
-        return this.interests.length < this.interestsMaxCount;
+        return interests.value.length < interestsMaxCount.value;
       };
       const canRemoveInterests = () => {
-        return this.interests.length > 1;
+        return interests.value.length > 1;
       }
     
 </script>
@@ -90,7 +83,7 @@ import { ref } from 'vue'
               <label for="name">お名前<span class="badge">必須</span></label>
               <input type="text" name="name" id="name" v-model="name">
               <div class="errors" v-if="errors">
-                <div class="error" v-for="error in errors">{{ error }}</div>
+                <div class="error">{{ errors.name }}</div>
               </div>
             </div>
 
@@ -101,7 +94,7 @@ import { ref } from 'vue'
                 <button class="button-outline" @click.prevent="zipToAddress">住所を入力</button>
               </div>
               <div class="errors" v-if="errors">
-                <div class="error" v-for="error in errors">{{ error }}</div>
+                <div class="error">{{ errors.zip }}</div>
               </div>
             </div>
 
@@ -158,7 +151,7 @@ import { ref } from 'vue'
                 <option value="沖縄県">沖縄県</option>
               </select>
               <div class="errors" v-if="errors">
-                <div class="error" v-for="error in errors">{{ error }}</div>
+                <div class="error">{{ errors.prefecture }}</div>
               </div>
             </div>
 
@@ -166,7 +159,7 @@ import { ref } from 'vue'
               <label for="address">市区町村・番地<span class="badge">必須</span></label>
               <input type="text" name="address" id="address" v-model="address" placeholder="千代田区神田錦町3-1">
               <div class="errors" v-if="errors">
-                <div class="error" v-for="error in errors">{{ error }}</div>
+                <div class="error">{{ errors.address }}</div>
               </div>
             </div>
 
@@ -182,7 +175,7 @@ import { ref } from 'vue'
                 <button class="button-outline" v-if="canRemoveInterests" @click.prevent="removeInterests(index)">削除</button>
               </div>
               <div class="errors" v-if="errors">
-                <div class="error" v-for="error in errors">{{ error }}</div>
+                <div class="error">{{ errors.badge }}</div>
               </div>
               <button class="button-outline" v-if="canAddInterests" @click.prevent="addInterests">追加</button>
             </div>
