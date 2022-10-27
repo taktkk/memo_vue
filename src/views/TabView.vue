@@ -33,7 +33,7 @@
   </div>
 </template>
 
-<style>
+<style scoped>
     .tab {
       list-style: none;
       border-bottom: 1px solid #ccc;
