@@ -29,6 +29,14 @@ const router = createRouter({
       component: () => import('../views/AccordionView.vue')
     },
     {
+      path: '/tab',
+      name: 'tab',
+      // route level code-splitting
+      // this generates a separate chunk (About.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import('../views/TabView.vue')
+    },
+    {
       path: '/edit/:id',
       name: 'edit',
       component: EditView

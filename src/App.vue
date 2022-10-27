@@ -14,6 +14,8 @@ import { ref, reactive } from 'vue';
         <RouterLink to="/new">New</RouterLink>
         <RouterLink to="/about">About</RouterLink>
         <RouterLink to="/accordion">Accordion</RouterLink>
+        <RouterLink to="/tab">Tab</RouterLink>
+
       </nav>
   </header>
 
